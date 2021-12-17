@@ -1,13 +1,23 @@
-# Libraries
-
 import pandas as pd
-import numpy as np
-import matplotlib as plt
+from sklearn.preprocessing import LabelEncoder
 
-# Loading the datasets
+df = pd.read_csv("C:/Users/Stevie/PycharmProjects/Python/data/sales_data.csv")
 
-data2 = pd.read_csv("C:/Users/Stevie/Documents/GitHub/dataprojects/who_covid19.csv")
+# Feature imputation - Replacing all NAS
+df.Customer_Age.fillna("No Age",inplace=True)
 
-# Looking 
-data2.info()
+df = pd.read_csv("C:/Users/Stevie/PycharmProjects/Python/data/sales_data.csv")
+
+
+
+# Labelling categorical variables
+labels = {}
+for c in ["Customer_Gender"]:
+    labels[c] = LabelEncoder()
+    df[c] = labels[c].fit_transform(df[c])
+
+
+# Exporting Processed Data
+sales_data_process = "data/sales_data_processed.csv"
+df.to_csv(sales_data_process)
 
